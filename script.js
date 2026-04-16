@@ -1,15 +1,32 @@
-// Load JSON image configuration
-const imageConfig = require('./imageConfig.json');
+const imagesData = {
+    hero: 'path/to/hero/image.jpg',
+    highlight: 'path/to/highlight/image.jpg'
+};
 
-// Function to get image by name
-function getImage(name) {
-    return imageConfig[name] || defaultImage; // defaultImage should be defined elsewhere
+const highlightCards = [
+    { title: 'Card 1', content: 'Content for Card 1', image: imagesData.highlight },
+    { title: 'Card 2', content: 'Content for Card 2', image: imagesData.highlight },
+    // more card objects can be added here
+];
+
+function createHighlights() {
+    const container = document.getElementById('highlights-container');
+    highlightCards.forEach(card => {
+        const cardElement = document.createElement('div');
+        cardElement.classList.add('highlight-card');
+
+        const titleElement = document.createElement('h3');
+        titleElement.textContent = card.title;
+
+        const contentElement = document.createElement('p');
+        contentElement.textContent = card.content;
+
+        const imageElement = document.createElement('img');
+        imageElement.src = card.image;
+
+        cardElement.appendChild(titleElement);
+        cardElement.appendChild(contentElement);
+        cardElement.appendChild(imageElement);
+        container.appendChild(cardElement);
+    });
 }
-
-// Example function modification to use images from JSON data
-function displayImage(name) {
-    const imagePath = getImage(name);
-    // code to display image using imagePath
-}
-
-// Other existing functions can be modified similarly to utilize images from JSON
